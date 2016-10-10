@@ -34,16 +34,18 @@
 	<div class="box" id="box">
 		
 	</div>
+	
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
+	<div class="shadow"></div>
 	<script>
 		window.onload = function(){
-			var iNow = 0;
-			var body = document.body;
-			var t =  setInterval(function(){
-				if(++iNow>12){
-					clearInterval(t);
-				}
-				body.innerHTML+= '<div class="shadow"></div>'
-			},1000)
 			var box = document.getElementById('box');
 			var disX = 0 ,
 				disY = 0;
