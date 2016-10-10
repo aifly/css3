@@ -13,6 +13,7 @@
 			width: 100px;
 			height: 100px;
 			background: red;
+			-webkit-transition:.4s;
 			position: absolute;
 		}
 		.box:after{
@@ -23,6 +24,7 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
+
 		}
 		.shadow{
 			width: 30px;
@@ -64,25 +66,17 @@
 	<div class="shadow"></div>
 	<script>
 		window.onload = function(){
-			
 			var box = document.getElementById('box');
 			var disX = 0 ,
-				disY = 0;
-			box.addEventListener('touchstart',function(e){
-
-				var e = e.changedTouches[0];
-				disX = e.pageX - this.offsetLeft;
-				disY = e.pageY - this.offsetTop;
-
-			});
-
-			document.addEventListener('touchmove',function(e){
-				e.preventDefault();
-				var e = e.changedTouches[0];
-				box.style.left = e.pageX - disX + 'px';
-				box.style.top = e.pageY - disY + 'px';
-				return 0;
-			})
+				disY = 0,
+				iNow = 0;
+				box.addEventListener('touchstart',function(e){
+					var e = e.changedTouches[0];
+					disX = e.pageX - this.offsetLeft;
+					disY = e.pageY - this.offsetTop;
+					this.style.WebkitTransform = 'translate3d(0,'+(iNow%2===0?'400px':'0')+',0)';	
+					iNow++;
+				});
 		}
 	</script>
 </body>
