@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>loading</title>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+	<script>
+		window.onload = function(){
+			var arr = [
+					'https://aifly.github.io/midautumnfestival/assets/images/window.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/women.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/shadow.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/share.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/moon-heart.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/plum.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/meteor.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/petal.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/rabbit.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/text.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/boxopen.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/box.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/bg.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/face1.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/face2.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/face3.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/face4.png',
+					'https://aifly.github.io/midautumnfestival/assets/images/house.png'
+				];
+			var box = document.getElementById('box');
+			loading(arr,function(scale){
+				//加载中的回调
+				box.innerHTML = (scale * 100 | 0) + "%";//｜ 我一般用来向下取整
+
+			},function(){
+				console.log('加载完成');
+			});
+		}
+		
+		function loading(arr, fn, fnEnd){
+	        var len = arr.length;//待加载的图片数组
+	        var i = 0; //记录当前加载到哪一张图片
+	        loadimg();//启动递归函数
+	        function loadimg() {
+	            if (i === len) {//如果加载到最后一张
+	                return;
+	            }
+	            var img = new Image();
+	            img.onload = img.onerror = function() {
+	                if (i < len - 1) {//数组中的图片未加载完。
+	                    i++;//不管是加载成功或者失败，要继续加载下一张
+	                    loadimg();
+	                    //i是已经加载完成的图片，len-1是所有的图片
+	                    //（代表的是索引，都是从0开始的，所有要 -1）
+	                    //i/(len-1)就是能得到当前的加载的比例值；
+	                    fn && fn(i / (len - 1), img.src);
+	                } else {//所有的图片加载完成。调用fnEnd函数
+	                    fnEnd && fnEnd(img.src);
+	                }
+	            };
+	            img.src = arr[i];
+	        }
+	    }
+
+
+	</script>
+</body>
+</html>
